@@ -4,7 +4,8 @@ export default defineEventHandler<Promise<string>>(async (event) => {
     throw createError({ statusCode: 403, statusMessage: '密码错误' })
   }
   const { PrismaClient } = await import('@prisma/client')
-  const prisma = new PrismaClient();
+  const { withAccelerate } = await import('@prisma/extension-accelerate')
+  const prisma = new PrismaClient().$extends(withAccelerate());
   await prisma.issue.delete({
     where: { id: parseInt(id as string) }
   })

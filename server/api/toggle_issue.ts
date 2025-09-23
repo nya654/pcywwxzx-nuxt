@@ -1,6 +1,7 @@
 export default defineEventHandler<Promise<string>>(async (event) => {
   const { PrismaClient } = await import('@prisma/client')
-  const prisma = new PrismaClient();
+  const { withAccelerate } = await import('@prisma/extension-accelerate')
+  const prisma = new PrismaClient().$extends(withAccelerate());
   const { passwd, id } = await getQuery(event)
   console.log(passwd, id)
   if (passwd !== useRuntimeConfig().manager_passwd) {

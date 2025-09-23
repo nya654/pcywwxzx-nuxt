@@ -15,7 +15,8 @@ function bigintToString(obj: any) {
 export default defineEventHandler(async () => {
   try {
     const { PrismaClient } = await import('@prisma/client')
-    const prisma = new PrismaClient();
+    const { withAccelerate } = await import('@prisma/extension-accelerate')
+    const prisma = new PrismaClient().$extends(withAccelerate());
     const issues = await prisma.$queryRaw`
       SELECT app_time FROM issues WHERE app_time IS NOT NULL
     `

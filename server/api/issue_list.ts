@@ -18,7 +18,8 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 403, statusMessage: '密码错误' })
   }
   const { PrismaClient } = await import('@prisma/client')
-  const prisma = new PrismaClient();
+  const { withAccelerate } = await import('@prisma/extension-accelerate')
+  const prisma = new PrismaClient().$extends(withAccelerate());
   const issue_list = await prisma.$queryRaw`
     SELECT
       id,
