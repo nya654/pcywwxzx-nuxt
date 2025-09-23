@@ -1,6 +1,3 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient();
-
 function bigintToString(obj: any) {
   if (Array.isArray(obj)) {
     return obj.map(bigintToString)
@@ -20,6 +17,8 @@ export default defineEventHandler(async (event) => {
   if (passwd !== useRuntimeConfig().manager_passwd) {
     throw createError({ statusCode: 403, statusMessage: '密码错误' })
   }
+  const { PrismaClient } = await import('@prisma/client')
+  const prisma = new PrismaClient();
   const issue_list = await prisma.$queryRaw`
     SELECT
       id,

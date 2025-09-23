@@ -1,6 +1,3 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient();
-
 function bigintToString(obj: any) {
   if (Array.isArray(obj)) {
     return obj.map(bigintToString)
@@ -17,6 +14,8 @@ function bigintToString(obj: any) {
 
 export default defineEventHandler(async () => {
   try {
+    const { PrismaClient } = await import('@prisma/client')
+    const prisma = new PrismaClient();
     const issues = await prisma.$queryRaw`
       SELECT app_time FROM issues WHERE app_time IS NOT NULL
     `

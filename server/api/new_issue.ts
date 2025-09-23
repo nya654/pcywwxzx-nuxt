@@ -1,5 +1,3 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient();
 interface NewIssueBody {
   uid: string
   name: string
@@ -11,6 +9,8 @@ interface NewIssueBody {
 }
 
 export default defineEventHandler<Promise<string>>(async (event) => {
+  const { PrismaClient } = await import('@prisma/client')
+  const prisma = new PrismaClient();
   const body = await readBody<NewIssueBody>(event)
   await prisma.issue.create({
     data: {

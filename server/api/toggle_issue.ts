@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient();
 export default defineEventHandler<Promise<string>>(async (event) => {
+  const { PrismaClient } = await import('@prisma/client')
+  const prisma = new PrismaClient();
   const { passwd, id } = await getQuery(event)
   console.log(passwd, id)
   if (passwd !== useRuntimeConfig().manager_passwd) {
