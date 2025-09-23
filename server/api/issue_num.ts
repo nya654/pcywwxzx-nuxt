@@ -1,7 +1,8 @@
 import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient();
+
 export default defineEventHandler(async () => {
   try {
+    const prisma = new PrismaClient();
     const count = await prisma.issue.count()
     console.log('Issue count:', count)
     return count
