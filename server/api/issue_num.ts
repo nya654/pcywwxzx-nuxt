@@ -1,11 +1,10 @@
+import { PrismaClient } from '@prisma/client'
+
 export default defineEventHandler(async () => {
   try {
     const { PrismaClient } = await import('@prisma/client')
-    let prisma = new PrismaClient()
-    if (process.env.NODE_ENV === 'production') {
-      const { withAccelerate } = await import('@prisma/extension-accelerate')
-      prisma = prisma.$extends(withAccelerate())
-    }
+    const { withAccelerate } = await import('@prisma/extension-accelerate')
+    const prisma = new PrismaClient().$extends(withAccelerate())
     const count = await prisma.issue.count()
     console.log('Issue count:', count)
     return count

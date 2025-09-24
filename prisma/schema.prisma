@@ -15,7 +15,7 @@ model hub_migrations {
   @@map("_hub_migrations")
 }
 
-model issues {
+model Issue {
   id          Int      @id @default(autoincrement())
   uid         String
   name        String
@@ -26,4 +26,6 @@ model issues {
   app_time    BigInt?
   closed      Boolean
   closed_time BigInt?
+
+  @@map("issues")
 }
