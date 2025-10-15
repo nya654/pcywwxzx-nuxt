@@ -1,4 +1,18 @@
 <script setup>
+
+const initFormData = 
+{
+  id: null,
+  uid: '',
+  name: '',
+  class: '',
+  phone: '',
+  problem: '',
+  reg_time: null,
+  app_time: '',
+  closed: false,
+  closed_time: null,
+}
 const formData = ref({
   id: null,
   uid: '',
@@ -62,6 +76,7 @@ async function submit() {
   })
     .then((response) => {
       alertInfo.value.info = response;
+      formData.value = {...initFormData};
     })
     .catch((error) => {
       alertInfo.value.error = error.response._data.message;
