@@ -27,6 +27,6 @@ const props = defineProps({
 const dateModel = defineModel();
 const data = ref('');
 watch(data, (newValue) => {
-  dateModel.value = newValue;
+  dateModel.value = newValue || '';
 }, { immediate: true });
 </script>
