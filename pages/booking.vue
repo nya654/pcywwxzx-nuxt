@@ -59,6 +59,21 @@ async function submit() {
   })
     .then((response) => {
       alertInfo.value.info = response;
+      formData.value = {
+        uid: '',
+        name: '',
+        class: '',
+        phone: '',
+        problem: '',
+        app_time: '',
+        closed: false,
+      };
+      hasChecked.value = {
+        userAgreement: false,
+        triedMyself: false,
+        describedInDetail: false,
+        comeEarly: false,
+      };
     })
     .catch((error) => {
       alertInfo.value.error = error.response._data.message;
