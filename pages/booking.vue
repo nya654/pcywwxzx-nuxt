@@ -68,12 +68,6 @@ async function submit() {
         app_time: '',
         closed: false,
       };
-      hasChecked.value = {
-        userAgreement: false,
-        triedMyself: false,
-        describedInDetail: false,
-        comeEarly: false,
-      };
     })
     .catch((error) => {
       alertInfo.value.error = error.response._data.message;
